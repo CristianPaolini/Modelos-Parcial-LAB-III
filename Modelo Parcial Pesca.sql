@@ -3,7 +3,7 @@ Use MODELOPARCIAL2_PUNTO2
 --A) El ganador del torneo es aquel que haya capturado el pez más pesado entre todos los
 --peces siempre y cuando se trate de un pez no descartado. Puede haber más de un ganador
 --del torneo. Listar Apellido y nombre, especie de pez que capturó y el pesaje del mismo.
-Select top 1 PAR.Apellido, PAR.Nombre, E.Especie, P.Peso
+Select top 1 with ties PAR.Apellido, PAR.Nombre, E.Especie, P.Peso
 From Participantes PAR
 Inner Join Pesca P on PAR.IDParticipante = P.IDParticipante
 Inner Join Especies E on P.IDEspecie = E.IDEspecie
