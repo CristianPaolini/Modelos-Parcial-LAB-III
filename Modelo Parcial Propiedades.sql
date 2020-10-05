@@ -2,11 +2,11 @@
 --que posea. (10 puntos)
 Select V.Apellidos, V.Nombres, count(distinct P.IDTipo)'Cant. de propiedades distinto tipo'
 From Vecinos V
-Inner Join Propiedades P on V.DNI = P.DNI
+Left Join Propiedades P on V.DNI = P.DNI
 Group by V.Apellidos, V.Nombres
 Order by 1
 
---2) - Listar todos los datos de los vecinos que no tengan Casas de m·s de 80m2 de superficie
+--2) - Listar todos los datos de los vecinos que no tengan Casas de m√°s de 80m2 de superficie
 --construida. (20 puntos)
 --NOTA: Tipo de propiedad = 'Casa'
 Select * From Vecinos V
@@ -30,7 +30,7 @@ Select V.Apellido, V.Nombre,
 )'Prop con superficie construida'
 From Vecinos V
 
---4) - Listar por cada tipo de propiedad el tipo y valor promedio. SÛlo listar aquellos registros cuyo
+--4) - Listar por cada tipo de propiedad el tipo y valor promedio. S√≥lo listar aquellos registros cuyo
 --valor promedio supere los $900000. (15 puntos)
 Select TP.Tipo, avg(P.Valor)'Valor promedio'
 From Tipos_Propiedades TP
@@ -39,7 +39,7 @@ Group by TP.Tipo
 Having avg(P.Valor) > 9000000
 
 --5) - Por cada vecino, listar apellido y nombres y el total acumulado en concepto de propiedades. Si
---un vecino no posee propiedades deber· figurar acumulando 0. (15 puntos)
+--un vecino no posee propiedades deber√° figurar acumulando 0. (15 puntos)
 Select V.Apellidos, V.Nombres, IsNull(sum(P.Valor), 0)'Total acumulado'
 From Vecinos V
 Left Join Propiedades P on V.DNI = P.DNI
