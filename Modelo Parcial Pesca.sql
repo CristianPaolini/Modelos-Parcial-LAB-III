@@ -1,27 +1,27 @@
 Use MODELOPARCIAL2_PUNTO2
 
---A) El ganador del torneo es aquel que haya capturado el pez m·s pesado entre todos los
---peces siempre y cuando se trate de un pez no descartado. Puede haber m·s de un ganador
---del torneo. Listar Apellido y nombre, especie de pez que capturÛ y el pesaje del mismo.
+--A) El ganador del torneo es aquel que haya capturado el pez m√°s pesado entre todos los
+--peces siempre y cuando se trate de un pez no descartado. Puede haber m√°s de un ganador
+--del torneo. Listar Apellido y nombre, especie de pez que captur√≥ y el pesaje del mismo.
 Select top 1 PAR.Apellido, PAR.Nombre, E.Especie, P.Peso
 From Participantes PAR
 Inner Join Pesca P on PAR.IDParticipante = P.IDParticipante
 Inner Join Especies E on P.IDEspecie = E.IDEspecie
 Order by P.Peso desc
 
---B) Listar todos los participantes que no hayan pescado ning˙n tipo de bagre. (ninguna
+--B) Listar todos los participantes que no hayan pescado ning√∫n tipo de bagre. (ninguna
 --especie cuyo nombre contenga la palabra "bagre"). Listar apellido y nombre.
 Select PAR.Apellido, PAR.Nombre
 From Participantes PAR
 Where PAR.IDParticipante not in(
 	Select P.IDParticipante
 	From Pesca P
-	Inner Join Especies E on P.IDEspecie = E.IDEspecie
+	Right Join Especies E on P.IDEspecie = E.IDEspecie
 	Where E.Especie like '%bagre%'
 )
 
 --C) Listar los participantes cuyo promedio de pesca (en kilos) sea mayor a 30. Listar apellido,
---nombre y promedio de kilos. ATENCI”N: No tener en cuenta los peces descartados.
+--nombre y promedio de kilos. ATENCI√ìN: No tener en cuenta los peces descartados.
 Select PAR.Apellido, PAR.Nombre, avg(P.Peso)'Promedio de kilos'
 From Participantes PAR
 Inner Join Pesca P on PAR.IDParticipante = P.IDParticipante
@@ -42,7 +42,7 @@ Select E.Especie,
 From Especies E
 
 --E) Por cada participante, listar apellido, nombres, la cantidad de peces no descartados y la
---cantidad de peces descartados que capturÛ.
+--cantidad de peces descartados que captur√≥.
 Select PAR.Apellido, PAR.Nombre,
 (
 	Select count(*) From Pesca P
@@ -56,9 +56,9 @@ From Participantes PAR
 
 --F) Listar apellido y nombre del participante y nombre de la especie de cada pez que haya
 --capturado el pescador/a. Si alguna especie de pez no ha sido pescado nunca entonces
---deber· aperecer en el listado de todas formas pero sin datos de pescador. El listado debe
---aparecer ordenado por nombre de especie de manera creciente. La combinaciÛn apellido,
---nombre y nombre de la especie debe aparecer sÛlo una vez en este listado.
+--deber√° aperecer en el listado de todas formas pero sin datos de pescador. El listado debe
+--aparecer ordenado por nombre de especie de manera creciente. La combinaci√≥n apellido,
+--nombre y nombre de la especie debe aparecer s√≥lo una vez en este listado.
 Select distinct PAR.Apellido, PAR.Nombre, E.Especie
 From Participantes PAR
 Inner Join Pesca P on PAR.IDParticipante = P.IDParticipante
